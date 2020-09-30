@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Pricing for Terraform remote backends can be complex and misleading. Here's our attempt to help you have a clearer view.">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Remote Backends Pricing Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h1>Remote Backends Pricing Calculator</h1>
+      <p class="text-success pb-3">Prices are up to date. Last update: 2020/09/29</p>
+      <p>Pricing for Terraform remote backends can be complex and misleading. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener">Scalr</a></p>
+      <p class="pb-3">If you want to add a remote backend, feel free to <a href="">submit a pull request</a></p>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mt-3">
+              <p class="bg-primary text-white text-center p-3 h5">Inputs</p>
+              <form class="p-3">
+                <div class="form-group">
+                  <label for="users">I have  <span id="numberOfUsers">10</span> user<span id="userPlural">s</span></label>
+                  <input type="range" min="1" max="100" value="10" class="form-control-range" id="users" oninput="updateUsers()">
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" id="run" class="form-check-input" oninput="compute()" checked>
+                  <label class="form-check-label" for="run">
+                    I need an extra concurrent run
+                  </label>
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" id="team" class="form-check-input" oninput="compute()" checked>
+                  <label class="form-check-label" for="team">
+                    I need roles & teams features, a policy engine and/or cost estimation
+                  </label>
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" id="sso" oninput="compute()" class="form-check-input">
+                  <label class="form-check-label" for="sso">
+                    SSO is a requirement
+                  </label>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-6 mt-3">
+              <p class="bg-primary text-white text-center p-3 h5">Results</p>
+              <div class="p-3">
+                <div class="text-center">
+                  <strong>Terraform Cloud: <span id="tfc"></span><br></strong>
+                  <br>
+                  <strong>Scalr: <span id="scalr"></span></strong><br>
+                  <br>
+                  <span id="comparison"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container my-5">
+      <p class="pb-3">Below is the comparison table on which the calculator has been built:</p>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th class="text-center align-middle" scope="col">Terraform Cloud Free</th>
+              <th class="text-center align-middle"scope="col">Scalr Free</th>
+              <th class="text-center align-middle" scope="col">Terraform Cloud Team</th>
+              <th class="text-center align-middle" scope="col">Terraform Cloud Team + Governance</th>
+              <th class="text-center align-middle" scope="col">Scalr Promo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Price</th>
+              <td class="text-center align-middle">Up to 5 users</td>
+              <td class="text-center align-middle">Up to 5 users</td>
+              <td class="text-center align-middle">$20/user/month</td>
+              <td class="text-center align-middle">$70/user/month</td>
+              <td class="text-center align-middle">$20/active user/month</td>
+            </tr>
+            <tr>
+              <th scope="row">Included Concurrent Runs</th>
+              <td class="text-center align-middle">1</td>
+              <td class="text-center align-middle">1 (Low Priority)</td>
+              <td class="text-center align-middle">1</td>
+              <td class="text-center align-middle">Up to 2</td>
+              <td class="text-center align-middle">Up to 2</td>
+            </tr>
+            <tr>
+              <th scope="row">Extra Concurrent Run</th>
+              <td class="text-center align-middle">-</td>
+              <td class="text-center align-middle">-</td>
+              <td class="text-center align-middle">-</td>
+              <td class="text-center align-middle">$500/month</td>
+              <td class="text-center align-middle">$0/month</td>
+            </tr>
+            <tr>
+              <th scope="row">SSO</th>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Roles & Teams</th>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Policy Engine</th>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Cost Estimation</th>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row">Policy Dry Runs</th>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="container">
+      <p class="font-weight-bold my-5">
+        <a href="https://github.com/scalr" target="_blank" rel="noopener">terraform-cloud-pricing-calculator</a> is maintained by <a href="https://scalr.com" target="_blank" rel="noopener">Scalr</a>
+      </p>
+    </div>
+    <script>
+      var users = document.getElementById('users');
+      var numberOfUsers = document.getElementById('numberOfUsers');
+      var run = document.getElementById('run');
+      var sso = document.getElementById('sso');
+      var team = document.getElementById('team');
+      var tfc = document.getElementById('tfc');
+      var scalr = document.getElementById('scalr');
+      var comparison = document.getElementById('comparison')
+
+      function updateUsers() {
+        numberOfUsers.innerHTML = users.value;
+        users.value > 1 ? userPlural.innerHTML = 's' : userPlural.innerHTML = '';
+        compute();
+      }
+
+      function compare(tfc, scalr) {
+        comparison.innerHTML = `Terraform Cloud is <strong>~${parseFloat((tfc / scalr).toFixed(1))}x</strong> more expensive than Scalr (${formatNumber(tfc - scalr)} / year)`;
+      }
+
+      function formatNumber(number) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number)
+      }
+
+      function compute() {
+        if (sso.checked) {
+          tfc.innerHTML = 'Enterprise Tier';
+          users.value < 6 ? scalr.innerHTML = 'Free' : scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+          comparison.innerHTML = "";
+        } else {
+          if (run.checked) {
+            tfc.innerHTML = `${formatNumber((users.value * 70 + 500) * 12) } / year`;
+            scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+            compare((users.value * 70 + 500) * 12, users.value * 20 * 12);
+          } else {
+            if (team.checked) {
+              tfc.innerHTML = `${formatNumber(users.value * 70 * 12)} / year`;
+              scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+              compare(users.value * 70 * 12, users.value * 20 * 12);
+            } else {
+              if (users.value < 6) {
+                tfc.innerHTML = 'Free';
+                scalr.innerHTML = 'Free';
+              } else {
+                tfc.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+                scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+              }
+              comparison.innerHTML = "";
+            }
+          }
+        }
+      }
+
+      compute();
+    </script>
+  </body>
+</html>
