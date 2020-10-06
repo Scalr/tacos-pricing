@@ -179,8 +179,8 @@
 
       function compute() {
         if (sso.checked) {
-          tfc.innerHTML = 'Enterprise Tier';
-          users.value < 6 ? scalr.innerHTML = 'Free' : scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+          tfc.innerHTML = 'Business Tier';
+          scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
           comparison.innerHTML = "";
         } else {
           if (run.checked) {
