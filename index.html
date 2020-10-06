@@ -9,58 +9,75 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Terraform Remote Backends Pricing Calculator</title>
+    <title>Terraform Remote Backend Pricing Calculator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
 
-  <body>
-    <div class="container mt-5">
-      <h1>Terraform Remote Backends Pricing Calculator</h1>
-      <p class="text-success pb-3">Prices are up to date. Last update: 2020/09/29</p>
+  <body class="bg-light">
+    <h1 class="bg-dark text-white text-center py-3 mb-0">Terraform Remote Backend Pricing Calculator</h1>
+    <div class="container mt-3">
+      <p class="text-success pt-3">Prices are up to date. Last update: 2020/09/29</p>
       <p>Pricing for Terraform remote backends can be complex and misleading. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener">Scalr</a></p>
-      <p class="pb-3"><a href="https://github.com/Scalr/remote-backends-pricing" target="_blank" rel="noopener">Pull requests are welcome</a>. For major changes, please open an issue first to discuss what you would like to change.</p>
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6 mt-3">
-              <p class="bg-primary text-white text-center p-3 h5">Inputs</p>
-              <form class="p-3">
-                <div class="form-group">
-                  <label for="users">I have  <span id="numberOfUsers">10</span> user<span id="userPlural">s</span></label>
-                  <input type="range" min="1" max="100" value="10" class="form-control-range" id="users" oninput="updateUsers()">
-                </div>
-                <div class="form-group form-check">
-                  <input type="checkbox" id="run" class="form-check-input" oninput="compute()" checked>
-                  <label class="form-check-label" for="run">
-                    I need an extra concurrent run
-                  </label>
-                </div>
-                <div class="form-group form-check">
-                  <input type="checkbox" id="team" class="form-check-input" oninput="compute()" checked>
-                  <label class="form-check-label" for="team">
-                    I need roles & teams features, a policy engine and/or cost estimation
-                  </label>
-                </div>
-                <div class="form-group form-check">
-                  <input type="checkbox" id="sso" oninput="compute()" class="form-check-input">
-                  <label class="form-check-label" for="sso">
-                    SSO is a requirement
-                  </label>
-                </div>
-              </form>
+      <p class="pb-3 mb-3"><a href="https://github.com/Scalr/remote-backends-pricing" target="_blank" rel="noopener">Pull requests are welcome</a>. For major changes, please open an issue first to discuss what you would like to change.</p>
+
+      <div class="row">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                Choose your options
+              </h5>
+              <p class="card-text">
+                <form class="p-3">
+                  <div class="form-group">
+                    <label for="users">I have  <span id="numberOfUsers">10</span> user<span id="userPlural">s</span></label>
+                    <input type="range" min="1" max="100" value="10" class="form-control-range" id="users" oninput="updateUsers()">
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" id="run" class="form-check-input" oninput="compute()" checked>
+                    <label class="form-check-label" for="run">
+                      I need an extra concurrent run
+                    </label>
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" id="team" class="form-check-input" oninput="compute()" checked>
+                    <label class="form-check-label" for="team">
+                      I need roles & teams features, a policy engine and/or cost estimation
+                    </label>
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" id="sso" oninput="compute()" class="form-check-input">
+                    <label class="form-check-label" for="sso">
+                      SSO is a requirement
+                    </label>
+                  </div>
+                </form>
+              </p>
             </div>
-            <div class="col-md-6 mt-3">
-              <p class="bg-primary text-white text-center p-3 h5">Results</p>
-              <div class="p-3">
-                <div class="text-center">
-                  <strong>Terraform Cloud: <span id="tfc"></span><br></strong>
-                  <br>
-                  <strong>Scalr: <span id="scalr"></span></strong><br>
-                  <br>
-                  <span id="comparison"></span>
-                </div>
-              </div>
-            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-3">
+              <h5>Compare cost per year</h5>
+              <table class="table mt-4 bg-white">
+                <thead>
+                  <tr>
+                    <th scope="col">Remote Backend</th>
+                    <th scope="col">Price per year</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Terraform Cloud</td>
+                    <td><span id="tfc"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Scalr</td>
+                    <td><span id="scalr"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span id="comparison" class="mt-5"></span>
           </div>
         </div>
       </div>
@@ -68,7 +85,7 @@
     <div class="container my-5">
       <p class="pb-3">Below is the comparison table on which the calculator has been built:</p>
       <div class="table-responsive">
-        <table class="table table-striped table-bordered">
+        <table class="table table-bordered bg-white table-hover">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -180,25 +197,25 @@
       function compute() {
         if (sso.checked) {
           tfc.innerHTML = 'Business Tier';
-          scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+          scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
           comparison.innerHTML = "";
         } else {
           if (run.checked) {
-            tfc.innerHTML = `${formatNumber((users.value * 70 + 500) * 12) } / year`;
-            scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+            tfc.innerHTML = `${formatNumber((users.value * 70 + 500) * 12) }`;
+            scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
             compare((users.value * 70 + 500) * 12, users.value * 20 * 12);
           } else {
             if (team.checked) {
-              tfc.innerHTML = `${formatNumber(users.value * 70 * 12)} / year`;
-              scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+              tfc.innerHTML = `${formatNumber(users.value * 70 * 12)}`;
+              scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
               compare(users.value * 70 * 12, users.value * 20 * 12);
             } else {
               if (users.value < 6) {
                 tfc.innerHTML = 'Free';
                 scalr.innerHTML = 'Free';
               } else {
-                tfc.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
-                scalr.innerHTML = `${formatNumber(users.value * 20 * 12)} / year`;
+                tfc.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
+                scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
               }
               comparison.innerHTML = "";
             }
