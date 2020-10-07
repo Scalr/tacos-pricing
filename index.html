@@ -16,9 +16,9 @@
   <body class="bg-light">
     <h1 class="bg-dark text-white text-center py-3 mb-0">Terraform Remote Backend Pricing Calculator</h1>
     <div class="container mt-3">
-      <p class="text-success pt-3">Prices are up to date. Last update: 2020/10/06</p>
-      <p>Pricing for Terraform remote backends can be complex and misleading. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener">Scalr</a></p>
-      <p class="pb-3 mb-3"><a href="https://github.com/Scalr/remote-backends-pricing" target="_blank" rel="noopener">Pull requests are welcome</a>. For major changes, please open an issue first to discuss what you would like to change.</p>
+      <p class="text-success pt-3">Prices are up to date as of 2020/10/06.</p>
+      <p>Pricing for Terraform remote backends can be complex and misleading. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener">Scalr</a>.</p>
+      <p class="pb-3 mb-3"><a href="https://github.com/Scalr/remote-backends-pricing" target="_blank" rel="noopener">Pull requests are welcome and encouraged</a>. For major changes, please open an issue first to discuss what you would like to change.</p>
 
       <div class="row">
         <div class="col-md-6 mb-5 mb-md-0">
@@ -167,7 +167,7 @@
     </div>
     <div class="container">
       <p class="my-5">
-        <a href="https://github.com/Scalr/remote-backends-pricing" target="_blank" rel="noopener" class="font-weight-bold">terraform-cloud-pricing-calculator</a> is maintained by <a href="https://scalr.com" target="_blank" rel="noopener" class="font-weight-bold">Scalr</a>
+        <a href="https://github.com/Scalr/remote-backends-pricing" target="_blank" rel="noopener" class="font-weight-bold">terraform-cloud-pricing-calculator</a> is maintained by <a href="https://scalr.com" target="_blank" rel="noopener" class="font-weight-bold">Scalr</a>.
         <br>
         <span class="font-italic">Terraform™ is a registered trademark of Hashicorp, Inc.</span>
       </p>
@@ -181,21 +181,17 @@
       var tfc = document.getElementById('tfc');
       var scalr = document.getElementById('scalr');
       var comparison = document.getElementById('comparison')
-
       function updateUsers() {
         numberOfUsers.innerHTML = users.value;
         users.value > 1 ? userPlural.innerHTML = 's' : userPlural.innerHTML = '';
         compute();
       }
-
       function compare(tfc, scalr) {
         comparison.innerHTML = `Terraform Cloud is <strong>~${parseFloat((tfc / scalr).toFixed(1))}x</strong> more expensive than Scalr (${formatNumber(tfc - scalr)} / year)`;
       }
-
       function formatNumber(number) {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number)
       }
-
       function compute() {
         if (sso.checked) {
           tfc.innerHTML = 'Business Tier';
@@ -224,7 +220,6 @@
           }
         }
       }
-
       compute();
     </script>
   </body>
