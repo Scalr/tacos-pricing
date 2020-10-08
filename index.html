@@ -10,10 +10,10 @@
     <meta name="description" content="Pricing for Terraform enhanced remote backends can be complex and misleading. Here's our attempt to help you have a clearer view.">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
     <title>Terraform Enhanced Remote Backend Pricing Calculator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
@@ -21,10 +21,11 @@
   <body class="bg-light">
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WK4592M"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <h1 class="bg-dark text-white text-center py-3 mb-0">Terraform Enhanced Remote Backend Pricing Calculator</h1>
+    <div class="header bg-dark text-white text-center py-3 mb-0">
+      <h1 class="h2 mb-0">Terraform Enhanced Remote Backend Pricing Calculator</h1>
+    </div>
     <div class="container mt-3">
-      <p class="text-success pt-3">Prices are up to date as of 2020/10/06.</p>
-      <p>Pricing for Terraform enhanced remote backends can be complex. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener" class="scalr">Scalr</a>.</p>
+      <p class="pt-3">Pricing for Terraform enhanced remote backends can be complex. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener" class="scalr">Scalr</a>.</p>
       <p><a href="https://github.com/Scalr/remote-backends-pricing" target="_blank" rel="noopener">Pull requests are welcome and encouraged</a>. For major changes, please open an issue first to discuss what you would like to change.</p>
       <p class="pb-3">Enhanced remote backends implement both state management (storing & locking state) and remote operations (runs, policy checks, cost estimations, ...) as well as a consistent execution environment and powerful access controls.</p>
 
@@ -68,19 +69,15 @@
           <div class="p-3">
               <h5>Compare cost per year</h5>
               <table class="table mt-4 bg-white">
-                <thead>
-                  <tr>
-                    <th scope="col">Remote Backend</th>
-                    <th scope="col">Price per year</th>
-                  </tr>
-                </thead>
                 <tbody>
                   <tr>
-                    <td>Terraform Cloud</td>
-                    <td><span id="tfc"></span></td>
+                    <th>Remote Backend</th>
+                    <td>Terraform</th>
+                    <td>Scalr</th>
                   </tr>
                   <tr>
-                    <td>Scalr</td>
+                    <th>Price per year</th>
+                    <td><span id="tfc"></span></td>
                     <td><span id="scalr"></span></td>
                   </tr>
                 </tbody>
@@ -91,46 +88,51 @@
       </div>
     </div>
     <div class="container my-5">
-      <p class="pb-3">Below is the comparison table on which the calculator has been built:</p>
+      <h5 class="pb-3">Below is the comparison table on which the calculator has been built:</h5>
       <div class="table-responsive">
         <table class="table table-bordered bg-white table-hover">
           <thead>
             <tr>
               <th scope="col"></th>
+              <th colspan="3" class="text-center align-middle">Terraform Cloud</th>
+              <th colspan="2" class="text-center align-middle">Scalr</th>
+            </tr>
+            <tr>
+              <th scope="col"></th>
               <th class="text-center align-middle" scope="col">Terraform Cloud Free</th>
-              <th class="text-center align-middle"scope="col">Scalr Free</th>
               <th class="text-center align-middle" scope="col">Terraform Cloud Team</th>
               <th class="text-center align-middle" scope="col">Terraform Cloud Team + Governance</th>
+              <th class="text-center align-middle"scope="col">Scalr Free</th>
               <th class="text-center align-middle" scope="col">Scalr Promo</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">Price</th>
-              <td class="text-center align-middle">Up to 5 users</td>
+              <th scope="row" class="align-middle">Price</th>
               <td class="text-center align-middle">Up to 5 users</td>
               <td class="text-center align-middle">$20/user/month</td>
               <td class="text-center align-middle">$70/user/month</td>
+              <td class="text-center align-middle">Up to 5 users</td>
               <td class="text-center align-middle">$20/active user/month</td>
             </tr>
             <tr>
-              <th scope="row">Included Concurrent Runs</th>
+              <th scope="row" class="align-middle">Included Concurrent Runs</th>
               <td class="text-center align-middle">1</td>
-              <td class="text-center align-middle">1 (Low Priority)</td>
               <td class="text-center align-middle">1</td>
               <td class="text-center align-middle">Up to 2</td>
+              <td class="text-center align-middle">1 (Low Priority)</td>
               <td class="text-center align-middle">Up to 2</td>
             </tr>
             <tr>
-              <th scope="row">Extra Concurrent Run</th>
-              <td class="text-center align-middle">-</td>
+              <th scope="row" class="align-middle">Extra Concurrent Run</th>
               <td class="text-center align-middle">-</td>
               <td class="text-center align-middle">-</td>
               <td class="text-center align-middle">$500/month</td>
+              <td class="text-center align-middle">-</td>
               <td class="text-center align-middle">$0/month</td>
             </tr>
             <tr>
-              <th scope="row">SSO</th>
+              <th scope="row" class="align-middle">SSO</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
@@ -138,31 +140,31 @@
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row">Roles & Teams</th>
+              <th scope="row" class="align-middle">Roles & Teams</th>
+              <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
-              <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row">Policy Engine</th>
+              <th scope="row" class="align-middle">Policy Engine</th>
+              <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
-              <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row">Cost Estimation</th>
+              <th scope="row" class="align-middle">Cost Estimation</th>
+              <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
-              <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row">Policy Dry Runs</th>
+              <th scope="row" class="align-middle">Policy Dry Runs</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
@@ -171,14 +173,10 @@
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-    <div class="container">
-      <p class="my-5">
+        <p class="text-success pt-3">Prices are up to date as of 2020/10/06.</p>
         <a href="https://github.com/Scalr/remote-backends-pricing" target="_blank" rel="noopener" class="font-weight-bold">remote-backends-pricing</a> is maintained by <a href="https://scalr.com" target="_blank" rel="noopener" class="font-weight-bold scalr">Scalr</a>.
-        <br>
-        <span class="font-italic">Terraform™ is a registered trademark of Hashicorp, Inc.</span>
-      </p>
+        <span class="font-italic pt-3 d-block">Terraform™ is a registered trademark of Hashicorp, Inc.</span>
+      </div>
     </div>
     <script>
       var users = document.getElementById('users');
@@ -195,10 +193,10 @@
         compute();
       }
       function compare(tfc, scalr) {
-        comparison.innerHTML = `Terraform Cloud is <strong>~${parseFloat((tfc / scalr).toFixed(1))}x</strong> more expensive than Scalr (${formatNumber(tfc - scalr)} / year)`;
+        comparison.innerHTML = `Terraform Cloud is <strong>~${parseFloat((tfc / scalr).toFixed(1))}x</strong> more expensive than Scalr (<span class="text-success">${formatNumber(tfc - scalr)} / year</span>)`;
       }
       function formatNumber(number) {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number)
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0}).format(number)
       }
       function compute() {
         if (sso.checked) {
