@@ -35,12 +35,20 @@
                     <label for="users">I have  <span id="numberOfUsers">10</span> user<span id="userPlural">s</span></label>
                     <input type="range" min="1" max="100" value="10" class="form-control-range" id="users" oninput="updateUsers()">
                   </div>
-                  <div class="form-group form-check">
+                  <div class="form-group">
+                    <label for="runs">I need <span id="numberOfConcurrentRuns">2</span> concurrent run<span id="runPlural">s</span></label>
+                    <input type="range" min="1" max="10" value="2" class="form-control-range" id="runs" oninput="updateUsers()">
+                  </div>
+                  <div class="form-group">
+                    <label for="applies">I run <span id="numberOfApplies">100</span> applie<span id="applyPlural">s</span> per month</label>
+                    <input type="range" min="1" max="1000" value="100" class="form-control-range" id="applies" oninput="updateUsers()">
+                  </div>
+                  <!-- <div class="form-group form-check">
                     <input type="checkbox" id="run" class="form-check-input" oninput="compute()" checked>
                     <label class="form-check-label" for="run">
                       I need an extra concurrent run
                     </label>
-                  </div>
+                  </div> -->
                   <div class="form-group form-check">
                     <input type="checkbox" id="team" class="form-check-input" oninput="compute()" checked>
                     <label class="form-check-label" for="team">
@@ -65,7 +73,7 @@
                 <tbody>
                   <tr>
                     <th>Remote Backend</th>
-                    <td>Terraform</th>
+                    <td>Terraform Cloud</th>
                     <td>Scalr</th>
                   </tr>
                   <tr>
@@ -94,35 +102,43 @@
               <th scope="col"></th>
               <th class="text-center align-middle" scope="col">Terraform Cloud Free</th>
               <th class="text-center align-middle" scope="col">Terraform Cloud Team</th>
-              <th class="text-center align-middle" scope="col">Terraform Cloud Team + Governance</th>
+              <th class="text-center align-middle" scope="col">Terraform Cloud Business</th>
               <th class="text-center align-middle"scope="col">Scalr Free</th>
               <th class="text-center align-middle" scope="col">Scalr Promo</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row" class="align-middle">Price</th>
-              <td class="text-center align-middle">Up to 5 users</td>
+              <th scope="row" class="align-middle">Price per user</th>
+              <td class="text-center align-middle">Free up to 5 users</td>
               <td class="text-center align-middle">$20/user/month</td>
-              <td class="text-center align-middle">$70/user/month</td>
-              <td class="text-center align-middle">Up to 5 users</td>
+              <td class="text-center align-middle">$36/user/month</td>
+              <td class="text-center align-middle">Free up to 5 users</td>
               <td class="text-center align-middle">$20/active user/month</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Included Concurrent Runs</th>
+              <th scope="row" class="align-middle">Included concurrent runs</th>
               <td class="text-center align-middle">1</td>
               <td class="text-center align-middle">1</td>
-              <td class="text-center align-middle">Up to 2</td>
+              <td class="text-center align-middle">Custom</td>
               <td class="text-center align-middle">1 (Low Priority)</td>
               <td class="text-center align-middle">Up to 2</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Extra Concurrent Run</th>
+              <th scope="row" class="align-middle">Price per extra concurrent run</th>
               <td class="text-center align-middle">-</td>
               <td class="text-center align-middle">-</td>
-              <td class="text-center align-middle">$500/month</td>
+              <td class="text-center align-middle">$3,000/month</td>
               <td class="text-center align-middle">-</td>
               <td class="text-center align-middle">$0/month</td>
+            </tr>
+            <tr>
+              <th scope="row" class="align-middle">Price per apply</th>
+              <td class="text-center align-middle">Unlimited applies</td>
+              <td class="text-center align-middle">Unlimited applies</td>
+              <td class="text-center align-middle">$4.5</td>
+              <td class="text-center align-middle">Unlimited applies</td>
+              <td class="text-center align-middle">Unlimited applies</td>
             </tr>
             <tr>
               <th scope="row" class="align-middle">SSO</th>
@@ -133,7 +149,7 @@
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Roles & Teams</th>
+              <th scope="row" class="align-middle">Roles & teams</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
@@ -141,7 +157,7 @@
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Policy Engine</th>
+              <th scope="row" class="align-middle">Policy engine</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
@@ -149,7 +165,7 @@
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Cost Estimation</th>
+              <th scope="row" class="align-middle">Cost estimation</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
@@ -157,7 +173,7 @@
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Policy Dry Runs</th>
+              <th scope="row" class="align-middle">Policy dry runs</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
@@ -174,7 +190,11 @@
     <script>
       var users = document.getElementById('users');
       var numberOfUsers = document.getElementById('numberOfUsers');
-      var run = document.getElementById('run');
+      var runs = document.getElementById('runs');
+      var numberOfRuns = document.getElementById('numberOfRuns');
+      var applies = document.getElementById('applies');
+      var numberOfApplies = document.getElementById('numberOfApplies');
+      // var run = document.getElementById('run');
       var sso = document.getElementById('sso');
       var team = document.getElementById('team');
       var tfc = document.getElementById('tfc');
@@ -193,11 +213,11 @@
       }
       function compute() {
         if (sso.checked) {
-          tfc.innerHTML = 'Business Tier';
+          tfc.innerHTML = `${formatNumber((users.value * 36 + runs.value * 3000 + applies.value * 4.5) * 12)}`;
           scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
-          comparison.innerHTML = "";
+          compare((users.value * 36 + runs.value * 3000 + applies.value * 4.5) * 12, users.value * 20 * 12);
         } else {
-          if (run.checked) {
+          if (runs.value > 1) {
             tfc.innerHTML = `${formatNumber((users.value * 70 + 500) * 12) }`;
             scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
             compare((users.value * 70 + 500) * 12, users.value * 20 * 12);
