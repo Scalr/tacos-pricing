@@ -2,23 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="description" content="Pricing for Terraform enhanced remote backends can be complex and misleading. Here's our attempt to help you have a clearer view.">
+    <meta name="description" content="Pricing for Terraform™ enhanced remote backends can be complex and misleading. Here's our attempt to help you have a clearer view.">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
-    <title>Terraform Enhanced Remote Backend Pricing Calculator</title>
+    <title>Terraform™ Enhanced Remote Backend Pricing Calculator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
 
   <body class="bg-light">
     <div class="header bg-dark text-white text-center py-3 mb-0">
-      <a href="/" class="text-white text-decoration-none"><h1 class="h2 mb-0">Terraform Enhanced Remote Backend Pricing Calculator</h1></a>
+      <a href="/" class="text-white text-decoration-none"><h1 class="h2 mb-0">Terraform™ Enhanced Remote Backend Pricing Calculator</h1></a>
     </div>
-    <div class="container mt-3">
-      <p class="pt-3">Pricing for Terraform enhanced remote backends can be complex. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener" class="scalr">Scalr</a>.</p>
+    <div class="container mt-3 px-md-0">
+      <p class="pt-3">Pricing for Terraform™ enhanced remote backends can be complex. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener" class="scalr">Scalr</a>.</p>
       <p><a href="https://github.com/Scalr/remote-backend-pricing" target="_blank" rel="noopener">Pull requests are welcome and encouraged</a>. For major changes, please open an issue first to discuss what you would like to change.</p>
       <p class="pb-3">Enhanced remote backends implement both state management (storing & locking state) and remote operations (runs, policy checks, cost estimations, ...) as well as a consistent execution environment and powerful access controls.</p>
 
@@ -67,8 +67,13 @@
                 <tbody>
                   <tr>
                     <th>Remote Backend</th>
-                    <td>Terraform Cloud</th>
+                    <td>Terraform™ Cloud</th>
                     <td>Scalr</th>
+                  </tr>
+                  <tr>
+                    <th>Plan</th>
+                    <td id="tfc-plan">Business</td>
+                    <td id="scalr-plan">Promo</td>
                   </tr>
                   <tr>
                     <th>Price per year</th>
@@ -82,21 +87,23 @@
         </div>
       </div>
     </div>
-    <div class="container my-5">
+    <div class="container mt-5">
       <h5 class="pb-3">Below is the comparison table on which the calculator has been built:</h5>
+    </div>
+    <div class="container-fluid my-5 px-5">
       <div class="table-responsive">
         <table class="table table-bordered bg-white table-hover">
           <thead>
             <tr>
               <th scope="col"></th>
-              <th colspan="3" class="text-center align-middle">Terraform Cloud</th>
+              <th colspan="3" class="text-center align-middle">Terraform™ Cloud</th>
               <th colspan="2" class="text-center align-middle">Scalr</th>
             </tr>
             <tr>
               <th scope="col"></th>
-              <th class="text-center align-middle" scope="col">Terraform Cloud Free</th>
-              <th class="text-center align-middle" scope="col">Terraform Cloud Team</th>
-              <th class="text-center align-middle" scope="col">Terraform Cloud Business</th>
+              <th class="text-center align-middle" scope="col">Terraform™ Cloud Free</th>
+              <th class="text-center align-middle" scope="col">Terraform™ Cloud Team</th>
+              <th class="text-center align-middle" scope="col">Terraform™ Cloud Business</th>
               <th class="text-center align-middle"scope="col">Scalr Free</th>
               <th class="text-center align-middle" scope="col">Scalr Promo</th>
             </tr>
@@ -169,7 +176,9 @@
           </tbody>
         </table>
       </div>
-      <p class="text-success pt-3">Prices are up to date as of 2020/10/29.</p>
+    </div>
+    <div class="container my-5">
+      <p class="text-success pt-3">Prices are up to date as of 2020/11/04.</p>
       <a href="https://github.com/Scalr/remote-backend-pricing" target="_blank" rel="noopener" class="font-weight-bold">remote-backend-pricing</a> is maintained by <a href="https://scalr.com" target="_blank" rel="noopener" class="font-weight-bold scalr">Scalr</a>.
       <span class="font-italic pt-3 d-block">Terraform™ is a registered trademark of Hashicorp, Inc.</span>
     </div>
@@ -185,7 +194,9 @@
       var team = document.getElementById('team');
       var tfc = document.getElementById('tfc');
       var scalr = document.getElementById('scalr');
-      var comparison = document.getElementById('comparison')
+      var comparison = document.getElementById('comparison');
+      var tfcPlan = document.getElementById('tfc-plan');
+      var scalrPlan = document.getElementById('scalr-plan');
       function updateUsers() {
         numberOfUsers.innerHTML = users.value;
         users.value > 1 ? userPlural.innerHTML = 's' : userPlural.innerHTML = '';
@@ -201,7 +212,7 @@
         compute();
       }
       function compare(tfc, scalr) {
-        comparison.innerHTML = `Terraform Cloud is <strong>~${parseFloat((tfc / scalr).toFixed(1))}x</strong> more expensive than Scalr (<span class="text-success">${formatNumber(tfc - scalr)} / year</span>)`;
+        comparison.innerHTML = `Terraform™ Cloud is <strong>~${parseFloat((tfc / scalr).toFixed(1))}x</strong> more expensive than Scalr (<span class="text-success">${formatNumber(tfc - scalr)} / year</span>)`;
       }
       function formatNumber(number) {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0}).format(number)
@@ -211,13 +222,19 @@
           tfc.innerHTML = `${formatNumber(Math.max((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12, 25000))}`;
           scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
           compare(Math.max((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12, 25000), users.value * 20 * 12);
+          scalrPlan.innerHTML = 'Promo';
+          tfcPlan.innerHTML = 'Business';
         } else {
           if (users.value < 6) {
             tfc.innerHTML = 'Free';
             scalr.innerHTML = 'Free';
+            scalrPlan.innerHTML = 'Free';
+            tfcPlan.innerHTML = 'Free';
           } else {
             tfc.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
             scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
+            scalrPlan.innerHTML = 'Promo';
+            tfcPlan.innerHTML = 'Team';
           }
           comparison.innerHTML = "";
         }
