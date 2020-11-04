@@ -40,8 +40,8 @@
                     <input type="range" min="1" max="5" value="2" class="form-control-range" id="runs" oninput="updateRuns()">
                   </div>
                   <div class="form-group">
-                    <label for="applies">I run <span id="numberOfApplies">100</span> applies per month</label>
-                    <input type="range" min="1" max="1000" value="100" class="form-control-range" id="applies" oninput="updateApplies()">
+                    <label for="applies">I need <span id="numberOfApplies">200</span> applies per month</label>
+                    <input type="range" min="100" max="1000" value="200" step="100" class="form-control-range" id="applies" oninput="updateApplies()">
                   </div>
                   <div class="form-group form-check">
                     <input type="checkbox" id="team" class="form-check-input" oninput="compute()" checked>
@@ -122,7 +122,7 @@
               <th scope="row" class="align-middle">Price per apply</th>
               <td class="text-center align-middle">Unlimited applies</td>
               <td class="text-center align-middle">Unlimited applies</td>
-              <td class="text-center align-middle">$4.5</td>
+              <td class="text-center align-middle">Extra fee</td>
               <td class="text-center align-middle">Unlimited applies</td>
               <td class="text-center align-middle">Unlimited applies</td>
             </tr>
@@ -208,9 +208,9 @@
       }
       function compute() {
         if (sso.checked || team.checked || runs.value > 1) {
-          tfc.innerHTML = `${formatNumber((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12)}`;
+          tfc.innerHTML = `${formatNumber(Math.max((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12, 25000))}`;
           scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
-          compare((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12, users.value * 20 * 12);
+          compare(Math.max((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12, 25000), users.value * 20 * 12);
         } else {
           if (users.value < 6) {
             tfc.innerHTML = 'Free';
