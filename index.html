@@ -122,7 +122,7 @@
               <th scope="row" class="align-middle">Price per extra concurrent run</th>
               <td class="text-center align-middle">-</td>
               <td class="text-center align-middle">-</td>
-              <td class="text-center align-middle">$3,000/month</td>
+              <td class="text-center align-middle">$5,000/year</td>
               <td class="text-center align-middle">-</td>
               <td class="text-center align-middle">Free upon approval</td>
             </tr>
@@ -216,9 +216,9 @@
       }
       function compute() {
         if (sso.checked || team.checked || runs.value > 1) {
-          tfc.innerHTML = `${formatNumber((users.value * 36 + runs.value * 3000 + applies.value * 4.5) * 12)}`;
+          tfc.innerHTML = `${formatNumber((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12)}`;
           scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
-          compare((users.value * 36 + runs.value * 3000 + applies.value * 4.5) * 12, users.value * 20 * 12);
+          compare((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12, users.value * 20 * 12);
         } else {
           if (users.value < 6) {
             tfc.innerHTML = 'Free';
