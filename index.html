@@ -2,23 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="description" content="Pricing for Terraform enhanced remote backends can be complex and misleading. Here's our attempt to help you have a clearer view.">
+    <meta name="description" content="Pricing for Terraform™ enhanced remote backends can be complex and misleading. Here's our attempt to help you have a clearer view.">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
-    <title>Terraform Enhanced Remote Backend Pricing Calculator</title>
+    <title>Terraform™ Enhanced Remote Backend Pricing Calculator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
 
   <body class="bg-light">
     <div class="header bg-dark text-white text-center py-3 mb-0">
-      <a href="/" class="text-white text-decoration-none"><h1 class="h2 mb-0">Terraform Enhanced Remote Backend Pricing Calculator</h1></a>
+      <a href="/" class="text-white text-decoration-none"><h1 class="h2 mb-0">Terraform™ Enhanced Remote Backend Pricing Calculator</h1></a>
     </div>
-    <div class="container mt-3">
-      <p class="pt-3">Pricing for Terraform enhanced remote backends can be complex. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener" class="scalr">Scalr</a>.</p>
+    <div class="container mt-3 px-md-0">
+      <p class="pt-3">Pricing for Terraform™ enhanced remote backends can be complex. Here's our attempt to help you have a clearer view - by the folks at <a href="https://scalr.com" target="_blank" rel="noopener" class="scalr">Scalr</a>.</p>
       <p><a href="https://github.com/Scalr/remote-backend-pricing" target="_blank" rel="noopener">Pull requests are welcome and encouraged</a>. For major changes, please open an issue first to discuss what you would like to change.</p>
       <p class="pb-3">Enhanced remote backends implement both state management (storing & locking state) and remote operations (runs, policy checks, cost estimations, ...) as well as a consistent execution environment and powerful access controls.</p>
 
@@ -35,11 +35,13 @@
                     <label for="users">I have  <span id="numberOfUsers">10</span> user<span id="userPlural">s</span></label>
                     <input type="range" min="1" max="100" value="10" class="form-control-range" id="users" oninput="updateUsers()">
                   </div>
-                  <div class="form-group form-check">
-                    <input type="checkbox" id="run" class="form-check-input" oninput="compute()" checked>
-                    <label class="form-check-label" for="run">
-                      I need an extra concurrent run
-                    </label>
+                  <div class="form-group">
+                    <label for="runs">I need <span id="numberOfRuns">2</span> concurrent run<span id="runPlural">s</span></label>
+                    <input type="range" min="1" max="5" value="2" class="form-control-range" id="runs" oninput="updateRuns()">
+                  </div>
+                  <div class="form-group">
+                    <label for="applies">I need <span id="numberOfApplies">200</span> applies per month</label>
+                    <input type="range" min="100" max="1000" value="200" step="100" class="form-control-range" id="applies" oninput="updateApplies()">
                   </div>
                   <div class="form-group form-check">
                     <input type="checkbox" id="team" class="form-check-input" oninput="compute()" checked>
@@ -65,8 +67,13 @@
                 <tbody>
                   <tr>
                     <th>Remote Backend</th>
-                    <td>Terraform Cloud</th>
+                    <td>Terraform™ Cloud</th>
                     <td>Scalr</th>
+                  </tr>
+                  <tr>
+                    <th>Plan</th>
+                    <td id="tfc-plan">Business</td>
+                    <td id="scalr-plan">Promo</td>
                   </tr>
                   <tr>
                     <th>Price per year</th>
@@ -80,76 +87,70 @@
         </div>
       </div>
     </div>
-    <div class="container my-5">
+    <div class="container mt-5">
       <h5 class="pb-3">Below is the comparison table on which the calculator has been built:</h5>
+    </div>
+    <div class="container-fluid my-5 px-5">
       <div class="table-responsive">
         <table class="table table-bordered bg-white table-hover">
           <thead>
             <tr>
               <th scope="col"></th>
-              <th colspan="3" class="text-center align-middle">Terraform Cloud</th>
+              <th colspan="3" class="text-center align-middle">Terraform™ Cloud</th>
               <th colspan="2" class="text-center align-middle">Scalr</th>
             </tr>
             <tr>
               <th scope="col"></th>
-              <th class="text-center align-middle" scope="col">Terraform Cloud Free</th>
-              <th class="text-center align-middle" scope="col">Terraform Cloud Team</th>
-              <th class="text-center align-middle" scope="col">Terraform Cloud Team + Governance</th>
+              <th class="text-center align-middle" scope="col">Terraform™ Cloud Free</th>
+              <th class="text-center align-middle" scope="col">Terraform™ Cloud Team</th>
+              <th class="text-center align-middle" scope="col">Terraform™ Cloud Business</th>
               <th class="text-center align-middle"scope="col">Scalr Free</th>
               <th class="text-center align-middle" scope="col">Scalr Promo</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row" class="align-middle">Price</th>
-              <td class="text-center align-middle">Up to 5 users</td>
+              <th scope="row" class="align-middle">Price per user</th>
+              <td class="text-center align-middle">Free up to 5 users</td>
               <td class="text-center align-middle">$20/user/month</td>
-              <td class="text-center align-middle">$70/user/month</td>
-              <td class="text-center align-middle">Up to 5 users</td>
+              <td class="text-center align-middle">$36/user/month</td>
+              <td class="text-center align-middle">Free up to 5 users</td>
               <td class="text-center align-middle">$20/active user/month</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Included Concurrent Runs</th>
-              <td class="text-center align-middle">1</td>
-              <td class="text-center align-middle">1</td>
-              <td class="text-center align-middle">Up to 2</td>
-              <td class="text-center align-middle">1 (Low Priority)</td>
-              <td class="text-center align-middle">Up to 2</td>
+              <th scope="row" class="align-middle">Price per extra concurrent run</th>
+              <td class="text-center align-middle">-</td>
+              <td class="text-center align-middle">-</td>
+              <td class="text-center align-middle">$5,000/year</td>
+              <td class="text-center align-middle">-</td>
+              <td class="text-center align-middle">Free upon approval</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Extra Concurrent Run</th>
-              <td class="text-center align-middle">-</td>
-              <td class="text-center align-middle">-</td>
-              <td class="text-center align-middle">$500/month</td>
-              <td class="text-center align-middle">-</td>
-              <td class="text-center align-middle">$0/month</td>
+              <th scope="row" class="align-middle">Price per apply</th>
+              <td class="text-center align-middle">Unlimited applies</td>
+              <td class="text-center align-middle">Unlimited applies</td>
+              <td class="text-center align-middle">Extra fee</td>
+              <td class="text-center align-middle">Unlimited applies</td>
+              <td class="text-center align-middle">Unlimited applies</td>
             </tr>
             <tr>
               <th scope="row" class="align-middle">SSO</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
-              <td class="text-center align-middle">No</td>
-              <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">Yes (Google, GitHub)</td>
+              <td class="text-center align-middle">Yes (Google, GitHub, SAML 2.0 IDP)</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Roles & Teams</th>
-              <td class="text-center align-middle">No</td>
+              <th scope="row" class="align-middle">Roles & teams</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
-              <td class="text-center align-middle">Yes</td>
-              <td class="text-center align-middle">Yes</td>
-            </tr>
-            <tr>
-              <th scope="row" class="align-middle">Policy Engine</th>
-              <td class="text-center align-middle">No</td>
-              <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
               <td class="text-center align-middle">Yes</td>
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Cost Estimation</th>
+              <th scope="row" class="align-middle">Policy engine</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">Yes</td>
@@ -157,7 +158,15 @@
               <td class="text-center align-middle">Yes</td>
             </tr>
             <tr>
-              <th scope="row" class="align-middle">Policy Dry Runs</th>
+              <th scope="row" class="align-middle">Cost estimation</th>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">No</td>
+              <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">Yes</td>
+              <td class="text-center align-middle">Yes</td>
+            </tr>
+            <tr>
+              <th scope="row" class="align-middle">Policy dry runs</th>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
               <td class="text-center align-middle">No</td>
@@ -166,57 +175,68 @@
             </tr>
           </tbody>
         </table>
-        <p class="text-success pt-3">Prices are up to date as of 2020/10/29.</p>
-        <a href="https://github.com/Scalr/remote-backend-pricing" target="_blank" rel="noopener" class="font-weight-bold">remote-backend-pricing</a> is maintained by <a href="https://scalr.com" target="_blank" rel="noopener" class="font-weight-bold scalr">Scalr</a>.
-        <span class="font-italic pt-3 d-block">Terraform™ is a registered trademark of Hashicorp, Inc.</span>
       </div>
+    </div>
+    <div class="container my-5">
+      <p class="text-success pt-3">Prices are up to date as of 2020/11/04.</p>
+      <a href="https://github.com/Scalr/remote-backend-pricing" target="_blank" rel="noopener" class="font-weight-bold">remote-backend-pricing</a> is maintained by <a href="https://scalr.com" target="_blank" rel="noopener" class="font-weight-bold scalr">Scalr</a>.
+      <span class="font-italic pt-3 d-block">Terraform™ is a registered trademark of Hashicorp, Inc.</span>
     </div>
     <script>
       var users = document.getElementById('users');
       var numberOfUsers = document.getElementById('numberOfUsers');
-      var run = document.getElementById('run');
+      var runs = document.getElementById('runs');
+      var numberOfRuns = document.getElementById('numberOfRuns');
+      var applies = document.getElementById('applies');
+      var numberOfApplies = document.getElementById('numberOfApplies');
+      // var run = document.getElementById('run');
       var sso = document.getElementById('sso');
       var team = document.getElementById('team');
       var tfc = document.getElementById('tfc');
       var scalr = document.getElementById('scalr');
-      var comparison = document.getElementById('comparison')
+      var comparison = document.getElementById('comparison');
+      var tfcPlan = document.getElementById('tfc-plan');
+      var scalrPlan = document.getElementById('scalr-plan');
       function updateUsers() {
         numberOfUsers.innerHTML = users.value;
         users.value > 1 ? userPlural.innerHTML = 's' : userPlural.innerHTML = '';
         compute();
       }
+      function updateRuns() {
+        numberOfRuns.innerHTML = runs.value;
+        runs.value > 1 ? runPlural.innerHTML = 's' : runPlural.innerHTML = '';
+        compute();
+      }
+      function updateApplies() {
+        numberOfApplies.innerHTML = applies.value;
+        compute();
+      }
       function compare(tfc, scalr) {
-        comparison.innerHTML = `Terraform Cloud is <strong>~${parseFloat((tfc / scalr).toFixed(1))}x</strong> more expensive than Scalr (<span class="text-success">${formatNumber(tfc - scalr)} / year</span>)`;
+        comparison.innerHTML = `Terraform™ Cloud is <strong>~${parseFloat((tfc / scalr).toFixed(1))}x</strong> more expensive than Scalr (<span class="text-success">${formatNumber(tfc - scalr)} / year</span>)`;
       }
       function formatNumber(number) {
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0}).format(number)
       }
       function compute() {
-        if (sso.checked) {
-          tfc.innerHTML = 'Business Tier';
+        if (sso.checked || team.checked || runs.value > 1) {
+          tfc.innerHTML = `${formatNumber(Math.max((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12, 25000))}`;
           scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
-          comparison.innerHTML = "";
+          compare(Math.max((users.value * 36 + runs.value * (5000/12) + applies.value * 4.5) * 12, 25000), users.value * 20 * 12);
+          scalrPlan.innerHTML = 'Promo';
+          tfcPlan.innerHTML = 'Business';
         } else {
-          if (run.checked) {
-            tfc.innerHTML = `${formatNumber((users.value * 70 + 500) * 12) }`;
-            scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
-            compare((users.value * 70 + 500) * 12, users.value * 20 * 12);
+          if (users.value < 6) {
+            tfc.innerHTML = 'Free';
+            scalr.innerHTML = 'Free';
+            scalrPlan.innerHTML = 'Free';
+            tfcPlan.innerHTML = 'Free';
           } else {
-            if (team.checked) {
-              tfc.innerHTML = `${formatNumber(users.value * 70 * 12)}`;
-              scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
-              compare(users.value * 70 * 12, users.value * 20 * 12);
-            } else {
-              if (users.value < 6) {
-                tfc.innerHTML = 'Free';
-                scalr.innerHTML = 'Free';
-              } else {
-                tfc.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
-                scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
-              }
-              comparison.innerHTML = "";
-            }
+            tfc.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
+            scalr.innerHTML = `${formatNumber(users.value * 20 * 12)}`;
+            scalrPlan.innerHTML = 'Promo';
+            tfcPlan.innerHTML = 'Team';
           }
+          comparison.innerHTML = "";
         }
       }
       compute();
